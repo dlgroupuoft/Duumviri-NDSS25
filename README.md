@@ -1,32 +1,40 @@
-Artifact release for the paper "Duumviri: Detecting Trackers and Mixed Trackers with a Breakage Detector" published at NDSS 2025.
+Artifact release for the paper "Duumviri: Detecting Trackers and Mixed Trackers with a Breakage Detector", published at NDSS 2025.
 
 
 # Goals
-Our artifacts should enable an user to 1. detect new non-mixed trackers, 2. detect new mixed trackers 3. replicate our evaluation on EasyList and EasyPrivacy and 4. inspect our mixed tracker evaluation dataset
+Our artifacts should enable users to:
+- Detect new non-mixed trackers.
+- Detect new mixed trackers.
+- Replicate our evaluation on EasyList and EasyPrivacy.
+- Inspect our mixed tracker evaluation dataset.
 
 # Enviroment
 
-If you like to build your own enviroment. 
+A Docker image with a pre-configured environment is available at [8759s/ndss_ae_docker:latest](https://hub.docker.com/r/8759s/ndss_ae_docker).
+
+```bash
+# To pull the image
+docker pull 8759s/ndss_ae_docker:latest
+
+# To run it
+docker run -it --device /dev/fuse --privileged 8759s/ndss_ae_docker /bin/bash
+```
+
+
+## Building 
+If you prefer to build your own environment, please refer to our Dockerfile. You can run the following command to build it:
 ```bash
 ./docker_commands/build_docker.sh
 ```
 
-Otherwise, you may use our Docker image with pre-configured enviroment. 
-
-```bash
-# To pull the image
-docker pull 8759s/duumviri_no_brave_source:latest
-
-# To run it
-docker run -it --device /dev/fuse --privileged 8759s/duumviri_no_brave_source /bin/bash
-```
+The build process expects a Brave browser capable of producing PageGraphs at ROOT/brave-browser. The executable should be at ROOT/brave-browser/src/out_old/Static/brave. The binary in our Docker image is compiled from [Brave Browser](https://github.com/brave/brave-browser) e956e98d663fd4896e4019a6dfc83d171ea40158 and [Brave Core](https://github.com/brave/brave-core) 08a0a373cbda554fbdbae141e54c3ab827675455 on Ubuntu 20.04.
 
 
 
 # Detecting Non-mixed Trackers 
-Input: a url of the page that you wish to find non-mixed trackers 
+Input: A URL of the page where you wish to find non-mixed trackers.
 
-Output: requests that Duumviri analyzed and the analysis result (i.e., non-mixed tracker or not)
+Output: Requests that Duumviri analyzed and the analysis result (i.e., whether it is a non-mixed tracker).
 
 Command: 
 ```bash 
@@ -63,9 +71,9 @@ This output is one request and analysis result per row. Taking the first two row
 This example site took 87 mins, using a single 2.6 GHz core.
 
 # Detecting Mixed Trackers 
-Input: a url of the page that you wish to find mixed trackers 
+Input: A URL of the page where you wish to find mixed trackers.
 
-Output: request, request field and value tuples that Duumviri analyzed and the analysis result (i.e., mixed tracker or not)
+Output: Request, request field, and value tuples that Duumviri analyzed, along with the analysis result (i.e., whether it is a mixed tracker).
 
 Command:
 ```bash 
@@ -109,11 +117,11 @@ Please refer to mixed_tracker_eval/README.md
 If you use the code/data in your research, please cite our work as follows:
 
 ```
-@inproceedings{Siby22WebGraph,
-  title     = {WebGraph: Capturing Advertising and Tracking Information Flows for Robust Blocking},
-  author    = {Sandra Siby, Umar Iqbal, Steven Englehardt, Zubair Shafiq, Carmela Troncoso},
-  booktitle = {USENIX Security Symposium (USENIX)},
-  year      = {2022}
+@inproceedings{Shuang25Duumviri,
+  title     = {Duumviri: Detecting Trackers and Mixed Trackers with a Breakage Detector},
+  author    = {He Shuang, Lianying Zhao, David Lie},
+  booktitle = {The Network and Distributed System Security Symposium (NDSS)},
+  year      = {2025}
 }
 ```
 
